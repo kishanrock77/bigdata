@@ -1,0 +1,67 @@
+<div class="intro-section" id="home-section">
+
+        <div class="slide-1"   data-stellar-background-ratio="0.5">
+          <div class="container">  
+            <div class="row align-items-center">
+              <div class="col-12">
+                <div class="row align-items-center">
+                  <div class="col-lg-7 mb-4">
+                    <h1 data-aos="fade-up" data-aos-delay="100">Sign Up if you do not have a account</h1>
+                   
+                    <p data-aos="fade-up" data-aos-delay="300"> 
+                        <a  class="btn btn-primary py-3 px-5 btn-pill" [routerLink]="['../signup']">Sign Up</a>
+                      </p>
+                      
+                      
+                  </div>
+    
+                  <div class="col-lg-5 ml-auto " data-aos="fade-up" data-aos-delay="500" >
+                     
+                    
+                    <form action="" method="post" class="form-box "  >
+                        <div class="form-group"> 
+                            <h4    > Forget Password</h4>
+                            <h6>We will be sending password to your registered Email Id</h6>
+                                </div>
+                        <div class="rightsidebar" style=" min-height: 190px;" >
+                          
+                            <small style="color: red;" [hidden]="errorMessage==''" >{{errorMessage}}</small> 
+                            <small style="color: green;" [hidden]="successMessage==''">{{successMessage}}</small> 
+                      <div  >
+                         
+                           
+                      <div class="form-group">
+                        <input type="text" class="form-control" #useremail placeholder="Your Email Addresss" id="useremail">
+                      </div>
+                      
+                       
+                    </div>
+                     
+                       
+    
+                     
+    
+                       
+                      <div class="form-group" >
+                        
+                        <button type="button"    class="btn btn-black "  (click)="forgetFunction(useremail)">Send Password</button>
+                       
+                                <a class="btn btn-black float-right" style="background-color: white;color:black" [routerLink]="['../login']">Back To Login</a>
+                              
+                                 
+                       </div>  
+                       
+                         
+                       
+    
+                       </div>
+                    </form>
+                     
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>

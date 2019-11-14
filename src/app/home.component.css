@@ -1,0 +1,31 @@
+.rightsidebar {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+ .rightsidebar::-webkit-scrollbar { 
+    width: 0 !important;
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btnFF {
+  border: 1px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 5px 15px;
+  border-radius: 0px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}

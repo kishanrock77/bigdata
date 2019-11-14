@@ -1,0 +1,77 @@
+<div class="intro-section" id="home-section">
+
+    <div class="slide-1"   data-stellar-background-ratio="0.5">
+      <div class="container">  
+        <div class="row align-items-center">
+          <div class="col-12">
+            <div class="row align-items-center">
+              <div class="col-lg-7 mb-4">
+                <h1 data-aos="fade-up" data-aos-delay="100">Login if you already have account</h1>
+                
+                <p data-aos="fade-up" data-aos-delay="300">
+                   <a class="btn btn-primary py-3 px-5 btn-pill" [routerLink]="['../login']">Login</a> </p>
+
+              </div>
+
+              <div class="col-lg-5 ml-auto " data-aos="fade-up" data-aos-delay="500" >
+                 
+                
+                <form action="" method="post" class="form-box "  >
+                    <div class="form-group"> 
+                        <h4    > Sign Up to create your account</h4>
+                            </div>
+                    <div class="rightsidebar" style=" min-height: 390px;" >
+                        <small style="color: red;" [hidden]="errorMessage==''" >{{errorMessage}}</small> 
+                        <h6 style="color: green;" [hidden]="successMessage==''"><br/><br/>{{successMessage}}<br/><br/></h6>
+                        <a [hidden]="successMessage==''"  class="btn btn-black float-right" style="background-color: white;color:black" [routerLink]="['../activate']">Click To Activate</a>
+ 
+                  <div  [hidden]="successMessage!=''" >
+                     
+                    <div class="form-group">
+                      <input type="text" class="form-control" #name placeholder="Your Name" id="name">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" #mobile placeholder="Your Mobile" id="mobile">
+                    </div> 
+                  <div class="form-group">
+                    <input type="text" class="form-control" #useremail placeholder="Your Email Addresss" id="useremail">
+                  </div>
+                  <div class="form-group">
+                   
+                      <input type="password" class="form-control"   #userpassword placeholder="Your Password" id="userpassword">
+                      
+                    </div>
+                    <div class="form-group">
+                   
+                      <input type="password" class="form-control"   #userpassword_confirm placeholder="Confirm Password" id="userpassword_confirm">
+                      
+                    </div>
+                    <div class="form-group" >
+                     
+                      <button type="button"    class="btn btn-black  "  [disabled]="signupActionStart" (click)="signUPFunction(useremail, userpassword, name, mobile, userpassword_confirm)">Sign Up</button>
+  
+                               
+                     </div>  
+                </div>
+                 
+                   
+
+                 
+
+                   
+                 
+                   
+                     
+                   
+
+                   </div>
+                </form>
+                 
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

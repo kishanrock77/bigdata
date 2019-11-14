@@ -1,0 +1,398 @@
+<div class="intro-section" id="home-section">
+
+    <div class="slide-1" style="background-image: url('../assets/images/hero_1.jpg');"
+      data-stellar-background-ratio="0.5">
+      <div class="container"><br/><br/> 
+        <div class="row align-items-center">
+          <div class="col-12">
+            <div class="row align-items-center">
+              <div class="col-lg-7 mb-4">
+                <h1 data-aos="fade-up" data-aos-delay="100">Learn From The Expert</h1>
+                <p class="mb-4" data-aos="fade-up" data-aos-delay="200">Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. Maxime ipsa nulla sed quis rerum amet natus quas necessitatibus.</p>
+                <p data-aos="fade-up" data-aos-delay="300"><a href="#"
+                    class="btn btn-primary py-3 px-5 btn-pill">Admission Now</a></p>
+
+              </div>
+
+              <div class="col-lg-5 ml-auto " data-aos="fade-up" data-aos-delay="500" >
+                 
+                
+                <form action="" method="post" class="form-box "  [hidden]="emailSuccessPortion==true || generatelinkSuccessPortion==true" >
+                  <div class="form-group"> 
+                  <button type="button"  class="btn btn-primary "  [hidden]="action_type=='LINK'" (click)="action_type='EMAIL';resetAnother()">  Email</button>
+                  <button type="button"  class="btn btn-primary " style="background-color:white;color: black;" [hidden]="action_type=='EMAIL'" (click)="action_type='EMAIL';resetAnother()">  Email</button>
+
+                  &nbsp;<button type="button"  class="btn btn-primary  " [hidden]="action_type=='EMAIL'" (click)="action_type='LINK';resetAnother()">  Link</button>
+                   <button type="button"  class="btn btn-primary  " style="background-color:white;color: black;"  [hidden]="action_type=='LINK'" (click)="action_type='LINK';resetAnother()">  Link</button>
+                </div>
+                    <div class="rightsidebar" style="max-height: 590px;min-height: 590px;overflow-y:scroll;" >
+                        <small style="color: red;" [hidden]="errorMessage==''" >{{errorMessage}}</small> 
+                        <small style="color: green;" [hidden]="successMessage==''">{{successMessage}}</small> 
+                  <div [hidden]="action_type=='LINK'">
+                     
+                       
+                  <div class="form-group">
+                    <input type="text" class="form-control" #useremail placeholder="Your Email Addresss" id="useremail">
+                  </div>
+                  <div class="form-group">
+                   
+                    <input type="text" class="form-control"   #targetemail placeholder="Target Email Address (Max 3)" id="targetemail">
+                    <b  style="font-size: 9px;">
+                        Separate email ids with comma e.g. abc@yahoo.com , eds@yahoo.com
+                                              </b>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control"   #subject placeholder="Subject" id="subject">
+                  </div>
+                  <div class="form-group mb-4">
+                    <textarea class="form-control" placeholder="Message"   #message id="message"></textarea>
+                  </div>
+                </div>
+                <div class="form-group" [hidden]="action_type=='EMAIL'">
+
+                </div>
+                  <div class="form-group mb-4">
+                    <div id="fileSelector">
+                        <b  style="font-size: 9px;">
+                            Max File Size {{maxSizeInGB}}
+                                                  </b><br/>
+                     
+
+                        <div class="upload-btn-wrapper">
+                            <button class="btnFF">Upload files</button>
+                            <input type="file" name="fileUplaod" id="fileUpload" multiple ng2FileSelect
+                            [uploader]="uploader">
+                          </div>
+                    </div>
+
+
+                  </div>
+
+                 
+
+                   
+                  <div class="form-group" >
+
+                    <button type="button" [hidden]="action_type=='EMAIL'" [disabled]="uploader?.queue?.length == 0 || generatelinkActionStart" class="btn btn-black float-right"  (click)="checkForgenerateLink()">Generate Link</button>
+
+                             
+                    <button type="button" [hidden]="action_type=='LINK'" [disabled]="uploader?.queue?.length == 0 || emailActionStart" class="btn btn-black float-right"  (click)="check(useremail,targetemail,subject,message)">Send Email</button>
+                  </div>  
+                  <div *ngIf="uploader?.queue?.length > 0" style="padding-bottom: 20px;">
+                      <br/><br/> <br/><h6  class="h6 text-black mb-2">List Of Files 
+                      <span style="cursor:pointer;color:blue" class="float-right"  [hidden]="generatelinkActionStart || emailActionStart" (click)="clearQue()">Clear All</span>
+                    </h6> 
+                  <div class="form-group rightsidebar"    style="max-height: 290px;overflow-y:scroll;" >
+                     
+                     <div class="row uploadList" *ngFor="let item of uploader.queue">
+                        <div class="col-sm-11"><small>{{item.file.name}}</small></div>
+                        <div class="col-sm-1">
+                            <button type="button"  style="display: none;" class="btn btn-dark" (click)="item.upload()">Upload</button>
+                            <button type="button" *ngIf="item.progress<100" (click)="item.remove()" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            
+                          </div>
+                        <div class="col-sm-12">
+                          <div class="progress">
+                            <div class="progress-bar bg-primary" [ngStyle]="{'width':item.progress+'%'}"></div>
+                          </div>
+                          <br/>
+                        </div>
+                       
+                      </div>
+                    </div><hr/>  </div>
+                     
+                   
+
+                  <div class="form-group" style="display: none;">
+                    <div class="row card">
+                      <h4>Download Section</h4>
+
+                      <div class="row" *ngFor="let item of attachmentList; let i = index"
+                        style="margin:10px;padding:5px;background-color:rgb(231, 229, 229); border-radius:5px; line-height:40px;">
+                        <div class="col-sm-7">{{item.originalname}}</div>
+                        <div class="col-sm-5" style="text-align:center;"><button type="button" class="btn btn-primary"
+                            (click)="download(i)">Download</button></div>
+                      </div>
+                    </div>
+
+                  </div></div>
+                </form>
+                <form action="" method="post" class="form-box " *ngIf='generatelinkSuccessPortion' style="min-height: 590px;">
+
+                 <br/><br/> <h4  align="center">Link Generated Successfully</h4><br/> 
+                  
+                 <h5> Generated Link To Share - <a href="{{generatedlink}}" target="_blank">{{generatedlink}}</a>
+                  <br/><br/> <span style="color: red;">Please Note - Data is available for {{maxDays}}  days only !!</span></h5>
+                  <br/><br/> <button type="button"  class="btn btn-warning btn-pill"  (click)="BackToGenerateAnotherLink()">Generate Another Link</button>
+
+                </form>
+                <form action="" method="post" class="form-box " *ngIf='emailSuccessPortion' style="min-height: 590px;">
+                    <br/><br/>  <h4 align="center"  >Email Sent Successfully</h4><br/>
+                    <h5>
+                        <span style="color: red;">Please Note - Data is available for {{maxDays}}  days only !!</span>
+                    </h5><br/><br/>
+                  <button type="button"  class="btn btn-warning btn-pill"  (click)="BackToSendAnotherEmail(useremail,targetemail,subject,message)">Send Another Email</button>
+
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="site-section" id="programs-section">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
+           <br/>            <br/>            <br/>            <br/>
+            <h2 class="section-title">Our Programs</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non
+            aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!
+          </p>
+        </div>
+      </div>
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
+          <img src="../assets/images/undraw_youtube_tutorial.svg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4">We Are Excellent In Education</h2>
+          <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus
+            fugiat quo molestiae illo.</p>
+
+          <div class="d-flex align-items-center custom-icon-wrap mb-3">
+            <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+            <div>
+              <h3 class="m-0">22,931 Yearly Graduates</h3>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center custom-icon-wrap">
+            <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+            <div>
+              <h3 class="m-0">150 Universities Worldwide</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+          <img src="../assets/images/undraw_teaching.svg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4">Strive for Excellent</h2>
+          <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus
+            fugiat quo molestiae illo.</p>
+
+          <div class="d-flex align-items-center custom-icon-wrap mb-3">
+            <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+            <div>
+              <h3 class="m-0">22,931 Yearly Graduates</h3>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center custom-icon-wrap">
+            <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+            <div>
+              <h3 class="m-0">150 Universities Worldwide</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
+          <img src="../assets/images/undraw_teacher.svg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4">Education is life</h2>
+          <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus
+            fugiat quo molestiae illo.</p>
+
+          <div class="d-flex align-items-center custom-icon-wrap mb-3">
+            <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+            <div>
+              <h3 class="m-0">22,931 Yearly Graduates</h3>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center custom-icon-wrap">
+            <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+            <div>
+              <h3 class="m-0">150 Universities Worldwide</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="site-section" id="teachers-section">
+    <div class="container">
+
+      <div class="row mb-5 justify-content-center">
+        <div class="col-lg-7 mb-5 text-center" data-aos="fade-up" data-aos-delay="">
+          <h2 class="section-title">Our Teachers</h2>
+          <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque!
+            Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam,
+            illum sed veniam!</p>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="teacher text-center">
+            <img src="../assets/images/person_1.jpg" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+            <div class="py-2">
+              <h3 class="text-black">Benjamin Stone</h3>
+              <p class="position">Physics Teacher</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto
+                tempora, adipisci at provident.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="teacher text-center">
+            <img src="../assets/images/person_2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+            <div class="py-2">
+              <h3 class="text-black">Katleen Stone</h3>
+              <p class="position">Physics Teacher</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto
+                tempora, adipisci at provident.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="teacher text-center">
+            <img src="../assets/images/person_3.jpg" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+            <div class="py-2">
+              <h3 class="text-black">Sadie White</h3>
+              <p class="position">Physics Teacher</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto
+                tempora, adipisci at provident.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section bg-image overlay" style="background-image: url('../assets/images/hero_1.jpg');">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-8 text-center testimony">
+          <img src="../assets/images/person_4.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+          <h3 class="mb-4">Jerome Jensen</h3>
+          <blockquote>
+            <p>&ldquo; Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum rem soluta sit eius
+              necessitatibus voluptate excepturi beatae ad eveniet sapiente impedit quae modi quo provident odit
+              molestias! Rem reprehenderit assumenda &rdquo;</p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section pb-0">
+
+    <div class="future-blobs">
+      <div class="blob_2">
+        <img src="../assets/images/blob_2.svg" alt="Image">
+      </div>
+      <div class="blob_1">
+        <img src="../assets/images/blob_1.svg" alt="Image">
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mb-5 justify-content-center" data-aos="fade-up" data-aos-delay="">
+        <div class="col-lg-7 text-center">
+          <h2 class="section-title">Why Choose Us</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 ml-auto align-self-start" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="p-4 rounded bg-white why-choose-us-box">
+
+            <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+              <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span>
+              </div>
+              <div>
+                <h3 class="m-0">22,931 Yearly Graduates</h3>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+              <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span>
+              </div>
+              <div>
+                <h3 class="m-0">150 Universities Worldwide</h3>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+              <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span>
+              </div>
+              <div>
+                <h3 class="m-0">Top Professionals in The World</h3>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+              <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span>
+              </div>
+              <div>
+                <h3 class="m-0">Expand Your Knowledge</h3>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+              <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span>
+              </div>
+              <div>
+                <h3 class="m-0">Best Online Teaching Assistant Courses</h3>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap custom-icon-light">
+              <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span>
+              </div>
+              <div>
+                <h3 class="m-0">Best Teachers</h3>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="col-lg-7 align-self-end" data-aos="fade-left" data-aos-delay="200">
+          <img src="../assets/images/person_transparent.png" alt="Image" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+

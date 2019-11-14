@@ -1,0 +1,58 @@
+<div   id="home-section" style="height: 100px;">
+
+        <div class="slide-1"  style="height: 20px;">
+        </div>
+    </div>
+  <div class="site-section bg-light" id="contact-section">
+        <div class="container">
+    
+          <div class="row justify-content-center">
+            <div class="col-md-7">
+    
+    
+    
+              <h2 class="section-title mb-3">Message Us</h2>
+              <p class="mb-5">You’ve got questions, and we have answers. Just send us a message and one of our knowledgeable support staff will be in contact with you within 48hrs – even on weekends and holidays.</p>
+              <small style="color: red;" [hidden]="errorMessage==''" >{{errorMessage}}</small> 
+              <small style="color: green;" [hidden]="successMessage==''">{{successMessage}}</small>
+              <form method="post" data-aos="fade">
+                <div class="form-group row">
+                  <div class="col-md-6 mb-3 mb-lg-0">
+                    <input type="text" class="form-control" placeholder="First name" #first id="first">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Last name" #last id="last">
+                  </div>
+                </div>
+    
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="Subject" #subject id="subject">
+                  </div>
+                </div>
+    
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="Email" #useremail  id="useremail">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <textarea class="form-control" id="message" #message cols="30" rows="10"
+                      placeholder="Write your message here."></textarea>
+                  </div>
+                </div>
+    
+                <div class="form-group row">
+                  <div class="col-md-6">
+    
+                    <input type="button" class="btn btn-primary py-3 px-5 btn-block btn-pill" [disabled]="contactActionStart" value="Send Message" (click)="contactFunction(useremail,subject,first,last,message)">
+                  </div> <div class="col-md-6">   <small style="color: red;" [hidden]="errorMessage==''" >{{errorMessage}}</small> 
+                    <small style="color: green;" [hidden]="successMessage==''">{{successMessage}}</small>  </div>
+                </div>
+    
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

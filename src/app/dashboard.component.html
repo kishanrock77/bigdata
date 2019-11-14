@@ -1,0 +1,75 @@
+ 
+<div class="site-section bg-light" id="contact-section" >
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+
+        
+       {{ errorMessage}}
+      
+            <div class="row">
+      
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100" >
+                <div class="teacher text-center">
+                  <div class="py-2">
+                    <h3 class="text-black">Plan Details</h3>
+                    <p class="position"  >{{workingdata.current_plan_name}}</p>
+                  
+                  <ul >
+                        <li *ngFor="let obj of workingdata.current_plan" style="text-align:left">
+
+                         <b> {{obj.title }}</b> : {{obj.value }}
+                        </li>
+                      </ul>  
+                    <p>
+                      
+                      <br/> <br/>
+                      <a class="btn btn-black  " [routerLink]="['planhistory']"    >  Plan History</a>
+                    
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100" >
+                <div class="teacher text-center">
+                  <div class="py-2">
+                    <h3 class="text-black">Email Details</h3>
+                    <p class="position">Physics Teacher</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto
+                      tempora, adipisci at provident.
+                      <br/> <br/>
+                      <a class="btn btn-black  " [routerLink]="['emailhistory']"    >  Email History</a>
+                    
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="teacher text-center">
+                   <div class="py-2">
+                    <h3 class="text-black">Link Details</h3>
+                    <p class="position">Physics Teacher</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto
+                      tempora, adipisci at provident.
+                      <br/> <br/>
+                      <a class="btn btn-black  " [routerLink]="['linkhistory']"    >  Link History</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+      
+             
+            </div>
+          
+      
+       
+      
+       
+      
+
+       
+      </div>
+    </div>
+  </div>
+</div>
